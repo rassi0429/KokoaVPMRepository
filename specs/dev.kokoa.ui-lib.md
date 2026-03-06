@@ -237,6 +237,18 @@ public static class KField
     public static bool EnumPopup<T>(string label, ref T value) where T : Enum;
     public static bool ObjectField<T>(string label, ref T value, bool allowSceneObjects = true) where T : UnityEngine.Object;
 
+    // === ラジオボタン（排他選択） ===
+
+    /// intインデックスベースのラジオボタン（縦並び）。
+    /// 選択肢をラベル文字列で指定する。
+    /// 戻り値: 選択が変わった場合 true。
+    public static bool RadioButtons(string label, ref int selectedIndex, params string[] options);
+
+    /// Enumベースのラジオボタン（縦並び）。
+    /// Enum値の各メンバーを選択肢として表示する。
+    /// 戻り値: 選択が変わった場合 true。
+    public static bool RadioButtons<T>(string label, ref T value) where T : Enum;
+
     // === KPrefs連携 ===
     // KPrefsオブジェクトを直接渡すと、ラベル・値読込・描画・値保存を1行で完結
 
@@ -259,6 +271,15 @@ if (KField.Toggle("Activeボタンを表示", ref showActive)) { SavePreferences
 
 // KPrefs連携なら保存も自動
 KField.Toggle(showActivePref); // 1行で描画+保存
+
+// ラジオボタン（intインデックス）
+int viewMode = 0;
+KField.RadioButtons("表示モード", ref viewMode, "サムネイル", "リスト", "詳細");
+
+// ラジオボタン（Enum）
+enum DisplayMode { Thumbnail, List, Detail }
+DisplayMode mode = DisplayMode.Thumbnail;
+KField.RadioButtons("表示モード", ref mode);
 ```
 
 ---
