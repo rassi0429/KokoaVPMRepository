@@ -47,6 +47,62 @@ const setAccentColor = () => {
   }
 }
 
+// ===== i18n =====
+let currentLang = 'en';
+let overrides = {};
+
+const detectLanguage = () => {
+  const lang = (navigator.language || '').split('-')[0].toLowerCase();
+  if (['ja', 'ko'].includes(lang)) return lang;
+  return 'en';
+};
+
+const getLocalizedText = (packageId, field) => {
+  if (currentLang === 'en') return PACKAGES[packageId]?.[field] || '';
+  return overrides[packageId]?.[currentLang]?.[field] || PACKAGES[packageId]?.[field] || '';
+};
+
+const applyLanguage = (lang) => {
+  currentLang = lang;
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+
+  const rows = document.querySelectorAll('fluent-data-grid-row[row-type="default"]');
+  rows.forEach(row => {
+    const packageId = row.querySelector('.rowAddToVccButton')?.dataset?.packageId
+      || row.querySelector('.rowPackageInfoButton')?.dataset?.packageId;
+    if (!packageId) return;
+
+    const displayName = getLocalizedText(packageId, 'displayName');
+    const description = getLocalizedText(packageId, 'description');
+
+    const nameEl = row.querySelector('.packageName');
+    const descEl = row.querySelector('.col > .caption1');
+
+    if (nameEl) nameEl.textContent = displayName;
+    if (descEl) descEl.textContent = description;
+    if (displayName) row.dataset.packageName = displayName;
+  });
+};
+
+const initI18n = async () => {
+  try {
+    const resp = await fetch('overrides.json');
+    if (resp.ok) overrides = await resp.json();
+  } catch (e) {
+    // overrides not available, use defaults
+  }
+
+  const lang = detectLanguage();
+  applyLanguage(lang);
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
+  });
+};
+
 const loadDownloadCounts = async () => {
   try {
     const resp = await fetch('downloads.json');
@@ -82,6 +138,7 @@ const loadDownloadCounts = async () => {
   setTheme();
   setAccentColor();
   loadDownloadCounts();
+  initI18n();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     setTheme();
@@ -210,10 +267,10 @@ const loadDownloadCounts = async () => {
         return;
       }
 
-      packageInfoName.textContent = packageInfo.displayName;
+      packageInfoName.textContent = getLocalizedText(packageId, 'displayName');
       packageInfoId.textContent = packageId;
       packageInfoVersion.textContent = `v${packageInfo.version}`;
-      packageInfoDescription.textContent = packageInfo.description;
+      packageInfoDescription.textContent = getLocalizedText(packageId, 'description');
       packageInfoAuthor.textContent = packageInfo.author.name;
       packageInfoAuthor.href = packageInfo.author.url;
 

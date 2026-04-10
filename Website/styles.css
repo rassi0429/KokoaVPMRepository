@@ -76,6 +76,60 @@ h1 {
   color: var(--neutral-foreground-rest);
 }
 
+/* ===== Language Switcher ===== */
+.lang-switcher {
+  position: fixed;
+  top: 12px;
+  right: 16px;
+  z-index: 100;
+  display: flex;
+  gap: 2px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 3px;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.lang-btn {
+  padding: 5px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  background: transparent;
+  color: #888;
+  transition: all 0.15s ease;
+}
+
+.lang-btn:hover {
+  color: var(--kokoa-primary-dark);
+  background: rgba(76, 175, 80, 0.08);
+}
+
+.lang-btn.active {
+  background: var(--kokoa-primary);
+  color: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  .lang-switcher {
+    background: rgba(40, 40, 40, 0.85);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .lang-btn {
+    color: #aaa;
+  }
+
+  .lang-btn:hover {
+    color: var(--kokoa-primary-light);
+    background: rgba(76, 175, 80, 0.15);
+  }
+}
+
 /* ===== Banner ===== */
 .bannerImage {
   aspect-ratio: 3 / 1;
