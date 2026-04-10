@@ -114,6 +114,27 @@ h1 {
   font-family: 'Nunito', sans-serif;
 }
 
+/* ===== Download Count ===== */
+.download-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.8rem;
+  color: var(--kokoa-primary-dark);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.download-count svg {
+  opacity: 0.7;
+}
+
+@media (prefers-color-scheme: dark) {
+  .download-count {
+    color: var(--kokoa-primary-light);
+  }
+}
+
 /* ===== Search ===== */
 .searchBlock {
   margin-top: 1rem;

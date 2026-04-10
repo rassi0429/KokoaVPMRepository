@@ -47,9 +47,41 @@ const setAccentColor = () => {
   }
 }
 
+const loadDownloadCounts = async () => {
+  try {
+    const resp = await fetch('downloads.json');
+    if (!resp.ok) return;
+    const data = await resp.json();
+
+    const rows = document.querySelectorAll('fluent-data-grid-row[row-type="default"]');
+    rows.forEach(row => {
+      const menuBtn = row.querySelector('.rowMenuButton');
+      const url = menuBtn?.dataset?.packageUrl;
+      if (!url) return;
+
+      const match = url.match(/github\.com\/([^/]+\/[^/]+)\//);
+      if (!match) return;
+
+      const count = data[match[1]];
+      if (count === undefined) return;
+
+      const nameEl = row.querySelector('.packageName');
+      if (!nameEl) return;
+
+      const badge = document.createElement('span');
+      badge.className = 'download-count';
+      badge.innerHTML = `<svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor"><path d="M15.5 17H4.5C4.224 17 4 17.224 4 17.5s.224.5.5.5h11c.276 0 .5-.224.5-.5s-.224-.5-.5-.5zM10 15.998c.245 0 .45-.177.492-.41L10.5 15.5V2.5c0-.276-.224-.5-.5-.5s-.5.224-.5.5v13l.008.088c.042.233.247.41.492.41z"/><path d="M10 16l-4.146-4.146a.5.5 0 01.638-.765l.07.057L10 14.586l3.438-3.44a.5.5 0 01.765.638l-.057.07L10 16z"/></svg> ${count.toLocaleString()}`;
+      nameEl.parentElement.appendChild(badge);
+    });
+  } catch (e) {
+    // downloads.json not available, silently ignore
+  }
+};
+
 (() => {
   setTheme();
   setAccentColor();
+  loadDownloadCounts();
 
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
     setTheme();

@@ -1,6 +1,8 @@
 name: Build Repo Listing
 
-on: 
+on:
+  schedule:
+    - cron: '0 * * * *'
   repository_dispatch:
     types: [automatic-web-update]
   workflow_dispatch:
@@ -53,6 +55,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
+      - name: Fetch download counts
+        run: |
+          result="{}"
+          for repo in $(jq -r '.githubRepos[]' source.json); do
+            count=$(gh api "repos/$repo/releases" --jq '[.[].assets[].download_count] | add // 0')
+            result=$(echo "$result" | jq --arg repo "$repo" --argjson count "${count:-0}" '. + {($repo): $count}')
+          done
+          result=$(echo "$result" | jq --arg time "$(date -u +%Y-%m-%dT%H:%M:%SZ)" '. + {updatedAt: $time}')
+          echo "$result" > "$GITHUB_WORKSPACE/${{ env.listPublishDirectory }}/downloads.json"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
         
