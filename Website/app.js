@@ -58,7 +58,6 @@ const detectLanguage = () => {
 };
 
 const getLocalizedText = (packageId, field) => {
-  if (currentLang === 'en') return PACKAGES[packageId]?.[field] || '';
   return overrides[packageId]?.[currentLang]?.[field] || PACKAGES[packageId]?.[field] || '';
 };
 

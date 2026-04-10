@@ -1,61 +1,85 @@
 {
   "dev.kokoa.upload-notification": {
+    "en": {
+      "displayName": "kokoa's Upload Notification",
+      "description": "Sends a notification when an upload completes."
+    },
     "ja": {
-      "displayName": "アップロード通知",
+      "displayName": "kokoa's Upload Notification",
       "description": "アップロード完了時に通知音を鳴らします"
     },
     "ko": {
-      "displayName": "업로드 알림",
+      "displayName": "kokoa's Upload Notification",
       "description": "업로드 완료 시 알림음을 재생합니다"
     }
   },
   "dev.kokoa.editor-wallpaper": {
+    "en": {
+      "displayName": "kokoa's Editor Wallpaper",
+      "description": "Editor extension to set custom wallpapers in the Unity Editor."
+    },
     "ja": {
-      "displayName": "エディター壁紙",
+      "displayName": "kokoa's Editor Wallpaper",
       "description": "Unity Editor の壁紙をカスタマイズできる拡張"
     },
     "ko": {
-      "displayName": "에디터 배경화면",
+      "displayName": "kokoa's Editor Wallpaper",
       "description": "Unity Editor의 배경화면을 커스터마이즈할 수 있는 확장"
     }
   },
   "dev.kokoa.toggle-buttons": {
+    "en": {
+      "displayName": "kokoa's Toggle Buttons",
+      "description": "Editor extension to enable/disable objects and mark them as Editor-only."
+    },
     "ja": {
-      "displayName": "トグルボタン",
+      "displayName": "kokoa's Toggle Buttons",
       "description": "オブジェクトの有効/無効を切り替え、Editor-only に設定できる拡張"
     },
     "ko": {
-      "displayName": "토글 버튼",
+      "displayName": "kokoa's Toggle Buttons",
       "description": "오브젝트의 활성화/비활성화를 전환하고 Editor-only로 설정할 수 있는 확장"
     }
   },
   "dev.kokoa.mesh-color-tool": {
+    "en": {
+      "displayName": "kokoa's Mesh Color Tool",
+      "description": "Lets you easily change mesh colors with a single click."
+    },
     "ja": {
-      "displayName": "メッシュカラーツール",
+      "displayName": "kokoa's Mesh Color Tool",
       "description": "メッシュの色をワンクリックで変更できるツール"
     },
     "ko": {
-      "displayName": "메시 컬러 툴",
+      "displayName": "kokoa's Mesh Color Tool",
       "description": "메시의 색상을 원클릭으로 변경할 수 있는 도구"
     }
   },
   "dev.kokoa.middleclick-inspector-opener": {
+    "en": {
+      "displayName": "kokoa's Middle Click Inspector Opener",
+      "description": "Opens a new inspector window with middle mouse click."
+    },
     "ja": {
-      "displayName": "中クリック Inspector",
+      "displayName": "kokoa's Middle Click Inspector Opener",
       "description": "中クリックで新しい Inspector ウィンドウを開く拡張"
     },
     "ko": {
-      "displayName": "미들클릭 Inspector",
+      "displayName": "kokoa's Middle Click Inspector Opener",
       "description": "미들클릭으로 새 Inspector 창을 여는 확장"
     }
   },
   "dev.kokoa.animation-label-simplify": {
+    "en": {
+      "displayName": "kokoa's Animation Label Simplify",
+      "description": "Simplifies animation labels for easier management."
+    },
     "ja": {
-      "displayName": "Animation ラベル簡略化",
+      "displayName": "kokoa's Animation Label Simplify",
       "description": "Animation のラベルをシンプルにする拡張"
     },
     "ko": {
-      "displayName": "애니메이션 라벨 간소화",
+      "displayName": "kokoa's Animation Label Simplify",
       "description": "애니메이션 라벨을 간소화하는 확장"
     }
   }
