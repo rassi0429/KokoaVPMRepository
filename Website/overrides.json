@@ -82,5 +82,15 @@
       "displayName": "kokoa's Animation Label Simplify",
       "description": "애니메이션 라벨을 간소화하는 확장"
     }
+  },
+  "dev.kokoa.skethrough": {
+    "en": {
+      "displayName": "kokoa's Skethrough",
+      "description": "A tool that can make anything transparent."
+    },
+    "ja": {
+      "displayName": "kokoa's Skethrough",
+      "description": "なんでもスケスケにして移動楽々！"
+    }
   }
 }
